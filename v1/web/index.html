@@ -1,0 +1,100 @@
+	<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Search</title>
+
+    <!-- Bootstrap -->
+    <link href="./lib/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Optional theme -->
+	<link rel="stylesheet" href="./lib/bootstrap-3.3.5/css/bootstrap-theme.min.css">
+	
+	<link rel="stylesheet" href="./css/main.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="col-lg-12">
+  	<div class="row ">
+  		
+		    <nav class="navbar navbar-inverse">
+			  
+			    <div class="navbar-header">
+			      	<img src="./img/logo.png" class="col-lg-9"></img>
+			    </div>
+				
+			    <div class="collapse navbar-collapse">
+			    	<div class="col-sm-5 col-md-5 pull-left dummySearchContainer" style="padding-left:0px;">
+			            <form class="form-group" style="margin-top: 10px;margin-bottom:10px;">
+			                <div class="input-group">
+			                    <input type="text" class="form-control dummySearchText" placeholder="Search">
+			                    <div class="input-group-btn dummySearchBtn">
+			                        <button class="btn btn-danger"><i class="glyphicon glyphicon-search"></i></button>
+			                    </div>
+			                </div>
+			            </form>
+			        </div> 
+			    </div>
+			  
+			</nav>
+			
+	</div>
+	
+	<div class="jumbotron dummyMessage">
+	  <h1>Welcome! Resume Search Engine</h1>
+	  <p class="dummyIndexErrorMessage">It seems there is no CVs are added for search.(Make sure to update the correct folder path for the CVs).</p>
+	  <p class="dummySearchMessage">Type the search keyword to see the results.</p>
+	  <p class="dummyIndexErrorMessage"><a class="btn btn-primary btn-lg dummyIndexCVs">Index CVs</a></p>
+	</div>
+
+	<div class="row dummyIndexSearch" style="display:none;">
+		<div class="col-lg-1">
+		</div>
+		<div class="col-lg-11">
+			<div class="row">
+				<div class="col-lg-12">
+					<p class="text-muted dummyListHeader">Results 0 of 'text'</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 dummySearchResultContainer">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<ul class="pagination dummyPaginationContainer">
+					 
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Latest compiled and minified JavaScript -->
+	<script src="./lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+
+	<script src="./js/constants.js"></script>
+	<script src="./js/utils.js"></script>
+	<script src="./js/service.js"></script>
+
+	<script src="./js/searchResultHandler.js"></script>
+
+	<script src="./js/views/paginationView.js"></script>
+	<script src="./js/views/searchListView.js"></script>
+	<script src="./js/views/uiView.js"></script>
+	<script src="./js/views/indexerView.js"></script>
+
+	<script src="./js/main.js"></script>
+  </body>
+</html>
