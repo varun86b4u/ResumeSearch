@@ -33,7 +33,7 @@ searchListView.prototype = {
 		var base64Path = btoa(path);
 		var url = '/api/doc/' + base64Path;
 		var html = '<div class="row">' +
-				   '<h4 class="col-lg-8 elipsses"><a class="dummyOpen" path="'+url+'">'+header+'</a></h4>'+
+				   '<h4 class="col-lg-8 elipsses"><a role="button" class="dummyOpen" path="'+url+'">'+header+'</a></h4>'+
 				   '</div>'+
 				   '<div class="row" style="margin-bottom:10px">'+
 			       '<p class="col-lg-12 elipsses">'+text+'</p>'+
