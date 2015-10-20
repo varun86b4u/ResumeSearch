@@ -21,7 +21,7 @@ uiView.prototype = {
 		if(hashValue){
 			var vals = hashValue.split('/');
 			if(vals && vals.length ==2){
-				var searchText = vals[0];
+				var searchText = atob(vals[0]);
 				var page = vals[1];
 				this.currentPage = parseInt(page);
 				$(".dummySearchText").val(searchText);
@@ -34,7 +34,7 @@ uiView.prototype = {
 			}
 		}
 		else{
-			var route = '/1';
+			var route = btoa('') + '/1';
 			window.location.hash = '#' + route;
 		}
 	},
@@ -42,7 +42,7 @@ uiView.prototype = {
 	bindEvents:function(){
 		$(".dummySearchBtn").unbind('click').bind('click',function(){
 			var searchText = $(".dummySearchText").val();
-			var route = searchText + '/1';
+			var route = btoa(searchText) + '/1';
 			window.location.hash = '#' + route;
 		}.bind(this));
 
@@ -50,7 +50,7 @@ uiView.prototype = {
 			if (e.keyCode == 13) {
 		        // Cancel the default action on keypress event
 		        var searchText = $(".dummySearchText").val();
-				var route = searchText + '/1';
+				var route = btoa(searchText) + '/1';
 				window.location.hash = '#' + route;
 		    }
 		}.bind(this));

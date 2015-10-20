@@ -16,8 +16,14 @@ indexerView.prototype = {
 	handleIndexCreation:function(flgExist){
 		if(!flgExist){
 			$(".dummyIndexCVs").unbind('click').bind('click',function(){
+				$(".dummyIndexCVs").button('toggle');
+				$(".dummyIndexCVs").text("This will take some Time. Please wait...");
 				this.serviceObj.startIndexing(function(){
-					this.handleUIBasedOnIndexExist(true);
+					$(".dummyIndexCVs").text("Indexing Successful.");
+					var self = this;
+					setTimeout(function(){
+						self.handleUIBasedOnIndexExist(true);
+					},500);
 				}.bind(this));
 			}.bind(this));
 		}

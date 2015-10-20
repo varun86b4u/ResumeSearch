@@ -6,6 +6,6 @@ config.es = {
 };
 
 
-config.resumeFolderPath = "../Cv\'s"
+config.resumeFolderPath = "../../Cv\'s"
 
 module.exports = config;
