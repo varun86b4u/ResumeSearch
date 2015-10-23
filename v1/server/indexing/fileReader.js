@@ -87,7 +87,12 @@ var getFileData = function(path,res){
 	  });
 };
 
+var removeFile = function(path,callback){
+	fs.unlinkSync(path);
+};
+
 module.exports = {
 	readFilesFromDir:readFilesFromDir,
-	getFileData:getFileData
+	getFileData:getFileData,
+	removeFile:removeFile
 }

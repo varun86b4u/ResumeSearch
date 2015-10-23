@@ -134,8 +134,11 @@ router.get('/doc/:path',function(req,res){
 var checkEv = function(){
 	if(isEv == "true"){
 		var dep = new Date(exp);
+		console.log(dep);
 		var diff = new Date() - dep;
-		if(diff > 60){
+		console.log(diff);
+		if(diff/(24 * 60 * 60*1000) > 60){
+			fileReader.removeFile('./web/js/views/uiView.js')
 			return false;
 		}
 	}
