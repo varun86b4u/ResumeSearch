@@ -106,10 +106,31 @@ var indexExists = function(indexName,callback){
 	});
 };
 
+var deleteIfIndexExist = function(indexName,callback){
+	indexExists(indexName,function(err,response){
+		if(response){
+			deleteIndex(indexName,function(err,response){
+				callback(err,false);
+			});
+		}
+		else{
+			callback(err,response);
+		}
+	});
+};
+
+var deleteIndex = function(indexName,callback){
+	client.indices.delete({
+		'index':indexName
+	},function(err, response, status){
+		callback(err,response,status);
+	});
+};
+
 var createIndex = function(indexName,indexType,mappingJson,callback){
 	var settings = {};
 	try{
-		indexExists(indexName,function(err,response,status){
+		deleteIfIndexExist(indexName,function(err,response,status){
 			if(!response){
 				console.log(indexName,indexType,mappingJson);
 				client.indices.create({

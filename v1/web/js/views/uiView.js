@@ -28,6 +28,7 @@ uiView.prototype = {
 				if(searchText){
 					$(".dummyMessage").hide();
 					$(".dummyIndexSearch").show();
+					$(".dummyNoResults").hide();
 					$(document).scrollTop(0);
 					this.searchResults(searchText,this.currentPage);
 				}
@@ -54,14 +55,29 @@ uiView.prototype = {
 				window.location.hash = '#' + route;
 		    }
 		}.bind(this));
+
+		$(".dummyReIndexCVs").unbind('click').bind('click',function(){
+			$(".dummyReIndexCVs").button('toggle');
+			alert("Do not close this window. This will take sometime. Please wait...");
+			this.service.startIndexing(function(){
+				$(".dummyReIndexCVs").button('toggle');
+				alert("ReIndexing Successful. Continue With search.");
+			}.bind(this));
+		}.bind(this));
 	},
 
 	searchResults:function(searchText,page){
 		var from = page - 1;
 		this.service.searchTextInDocs(searchText,from,this.consts.PAGE_SIZE,function(data){
 			var resultObj = new searchResultObj(data);
-			this.handleSearchListView(resultObj,searchText);
-			this.handlePaginationView(resultObj,searchText);
+			if(resultObj.totalCount() == 0){
+				$(".dummyIndexSearch").hide();
+				$(".dummyNoResults").show();
+			}
+			else{
+				this.handleSearchListView(resultObj,searchText);
+				this.handlePaginationView(resultObj,searchText);
+			}
 		}.bind(this));
 	},
 

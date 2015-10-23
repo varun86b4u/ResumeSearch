@@ -29,8 +29,10 @@ searchListView.prototype = {
 		var text = description.join('<br>');
 		text = text.replace(/<em>/g,'<strong>');
 		text = text.replace(/<\/em>/g,'</strong>');
-		var header = description.join(',');
 		var base64Path = btoa(path);
+		var resumeName = path[0].substring(path[0].lastIndexOf('/') + 1,path[0].lastIndexOf('.'));
+		var header = resumeName + ' : '  + description.join(',');
+		
 		var url = '/api/doc/' + base64Path;
 		var html = '<div class="row">' +
 				   '<h4 class="col-lg-8 elipsses"><a role="button" class="dummyOpen" path="'+url+'">'+header+'</a></h4>'+

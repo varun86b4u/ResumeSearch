@@ -1,2 +1,4 @@
 .DS_Store
 v1/node_modules
+nohup.out
+./tmp

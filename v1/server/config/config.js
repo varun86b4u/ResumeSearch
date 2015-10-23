@@ -7,5 +7,8 @@ config.es = {
 
 
 config.resumeFolderPath = "../../Cv\'s"
+config.ev = "dHJ1ZQ==";
+config.mic = "MTAwMDA=";
+config.exp = "MTAvMjQvMjAxNQ==";
 
 module.exports = config;

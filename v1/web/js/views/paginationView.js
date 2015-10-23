@@ -10,7 +10,7 @@ paginationView.prototype = {
 	 	this.totalCount = resultObj.totalCount();
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;
-		this.searchText = searchText;
+		this.searchText = btoa(searchText);
 		this.handlePaginationUI();
 		//this.bindUIEvents();
 	},

@@ -16,6 +16,10 @@ var utils = {
 		});
 		 
 		request.done(function( data ) {
+			if(data && data.status == "120"){
+				alert(data.success);
+				return;
+			}
 		  	callback(data)
 		});
 		 
