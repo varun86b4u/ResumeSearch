@@ -67,7 +67,7 @@ uiView.prototype = {
 	},
 
 	searchResults:function(searchText,page){
-		var from = page - 1;
+		var from = (page - 1) * this.consts.PAGE_SIZE;
 		this.service.searchTextInDocs(searchText,from,this.consts.PAGE_SIZE,function(data){
 			var resultObj = new searchResultObj(data);
 			if(resultObj.totalCount() == 0){
