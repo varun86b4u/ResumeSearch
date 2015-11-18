@@ -9,7 +9,7 @@ var mic = parseInt(atob(conf.mic),10);
 //var expHandler = require('./expHandler');
 
 
-var readFileInBatch = function(pageSize,startIndex,callback,list,fileContent){
+var readFileInBatch = function(pageSize,startIndex,callback,list,fileContent,sucessCallback){
 
 	var list1 = list.slice(startIndex,startIndex+pageSize);
 	console.log('list1', list1.length,list.length,startIndex,pageSize);
@@ -20,6 +20,9 @@ var readFileInBatch = function(pageSize,startIndex,callback,list,fileContent){
     		callback(null,fileContent);
     	}
     	else{
+    		if(sucessCallback){
+    			sucessCallback();
+    		}
     		startIndex = startIndex + list1.length;
     		console.log(startIndex,list.length);
     		readFileInBatch(pageSize,startIndex,callback,list,fileContent);
@@ -103,13 +106,13 @@ var cntRestrict = function(list){
 	return list1;
 };
 
-var readFilesFromDir = function(dirPath,callback){
+var readFilesFromDir = function(dirPath,sucessCallback,callback){
 	var fileContent = [];
 	walk(dirPath,function(err,list){
 		if(list && list.length > 0){
 			list = cntRestrict(list);
 			var pageSize = 500;
-			readFileInBatch(pageSize,0,callback,list,fileContent);
+			readFileInBatch(pageSize,0,callback,list,fileContent,sucessCallback);
 		}
 	});
 };

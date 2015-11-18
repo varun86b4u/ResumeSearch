@@ -8,10 +8,11 @@ var indexName = config.es.indexName;
 var indexType = config.es.indexType;
 
 var startIndexing = function(callback){
-	fileReader.readFilesFromDir(filePath,function(err,fileContentList){
+	//callack is passed as soon as file start reading, so that indexing can happen in background
+	fileReader.readFilesFromDir(filePath,callback,function(err,fileContentList){
 		createIndexAndMapping(function(){
 			esIndex.addDocsToIndex(indexName,indexType,fileContentList,function(){
-				callback();
+				//callback();
 			});
 		})
 	});
