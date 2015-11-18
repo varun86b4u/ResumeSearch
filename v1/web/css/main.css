@@ -4,3 +4,7 @@
     text-overflow: ellipsis;
 }
 
+
+.btn-danger {
+	background-image: linear-gradient(to bottom,#E91717 0,#E91717 100%);
+}
