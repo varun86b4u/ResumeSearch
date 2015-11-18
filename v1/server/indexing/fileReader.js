@@ -6,11 +6,67 @@ var atob = require('atob');
 
 var isEv = atob(conf.ev);
 var mic = parseInt(atob(conf.mic),10);
+//var expHandler = require('./expHandler');
 
+
+var readFileInBatch = function(pageSize,startIndex,callback,list,fileContent){
+
+	var list1 = list.slice(startIndex,startIndex+pageSize);
+	console.log('list1', list1.length,list.length,startIndex,pageSize);
+    readFilesFromList(list1,function(err,content){
+    	fileContent = fileContent.concat(content);
+    	console.log(fileContent.length,list.length);
+    	if(fileContent.length == list.length){
+    		callback(null,fileContent);
+    	}
+    	else{
+    		startIndex = startIndex + list1.length;
+    		console.log(startIndex,list.length);
+    		readFileInBatch(pageSize,startIndex,callback,list,fileContent);
+    	}
+    });
+}
+
+var readFilesFromList = function(list,callback){
+	var fileContent = [];
+	console.log('list1', list.length);
+	list.forEach(function(filePath){
+		try{
+
+			getFileBase64String(filePath,function(data,err){
+				if(err){
+					data = "";
+				}
+				var content = {
+					'path':filePath,
+					'data':data
+				}
+				fileContent.push(content);
+				if(fileContent.length == list.length){
+					console.log('list1', list.length);
+					callback(null,fileContent);
+				}
+			});
+	     }
+	     catch(e){
+	     	var content = {
+				'path':filePath,
+				'data':""
+			}
+			fileContent.push(content);
+			if(fileContent.length == list.length){
+				callback(null,fileContent);
+			}
+	     }
+	});
+}
 var getFileBase64String = function(filePath,callback){
 	fs.readFile(filePath,'base64',function(err,data){
-		if(!err)
-			callback(data);
+		//if(!err){
+			//console.log(filePath);
+			//new expHandler().parse(data);
+			callback(data,err);
+		//}
 	})
 }
 
@@ -52,18 +108,8 @@ var readFilesFromDir = function(dirPath,callback){
 	walk(dirPath,function(err,list){
 		if(list && list.length > 0){
 			list = cntRestrict(list);
-			list.forEach(function(filePath){
-				getFileBase64String(filePath,function(data){
-					var content = {
-						'path':filePath,
-						'data':data
-					}
-					fileContent.push(content);
-					if(fileContent.length == list.length){
-						callback(null,fileContent);
-					}
-				});
-			});
+			var pageSize = 500;
+			readFileInBatch(pageSize,0,callback,list,fileContent);
 		}
 	});
 };
