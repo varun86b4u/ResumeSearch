@@ -2,3 +2,4 @@
 v1/node_modules
 nohup.out
 ./tmp
+v1/web/dist/resume.js

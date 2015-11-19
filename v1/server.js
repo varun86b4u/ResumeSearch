@@ -1,7 +1,7 @@
 var express = require('express');
 var app = new express();
 
-var router = require('./server/routers/Router');
+var router = require('./build/routers/Router');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
